@@ -553,7 +553,7 @@ static int response_complete(http_parser *parser) {
     // Record if needed, either last in batch or all, depending in cfg:
     if (cfg.record_all_responses || !c->has_pending) {
         hdr_record_value(thread->latency_histogram, expected_latency_timing);
-
+	printf("Record latency: %lld, Start: %lld, End: %lld\n", expected_latency_timing, expected_latency_start, now);
         uint64_t actual_latency_timing = now - c->actual_latency_start;
         hdr_record_value(thread->u_latency_histogram, actual_latency_timing);
     }
