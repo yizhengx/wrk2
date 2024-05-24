@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
             cfg.pipeline = script_verify_request(t->L);
             cfg.dynamic = !script_is_static(t->L);
             if (script_want_response(t->L)) {
-                parser_settings.on_header_field = header_field;
+               parser_settings.on_header_field = header_field;
                 parser_settings.on_header_value = header_value;
                 parser_settings.on_body         = response_body;
             }
@@ -204,8 +204,7 @@ int main(int argc, char **argv) {
     latency_stats->max = hdr_max(latency_histogram);
     latency_stats->histogram = latency_histogram;
 
-    print_stats_header();
-    print_stats("Latency", latency_stats, format_time_us);
+
     print_stats("Req/Sec", statistics.requests, format_metric);
 //    if (cfg.latency) print_stats_latency(latency_stats);
 
@@ -553,7 +552,6 @@ static int response_complete(http_parser *parser) {
     // Record if needed, either last in batch or all, depending in cfg:
     if (cfg.record_all_responses || !c->has_pending) {
         hdr_record_value(thread->latency_histogram, expected_latency_timing);
-	printf("Record latency: %lld, Start: %lld, End: %lld\n", expected_latency_timing, expected_latency_start, now);
         uint64_t actual_latency_timing = now - c->actual_latency_start;
         hdr_record_value(thread->u_latency_histogram, actual_latency_timing);
     }
