@@ -116,5 +116,5 @@ request = function()
   local user_ratio        = 0.005
   local reserve_ratio     = 0.005
 
-  user_login(url)
+  return user_login(url)
 end
